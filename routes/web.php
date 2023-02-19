@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Livewire\Shop\IndexComponent;
 use Illuminate\Support\Facades\Route;
 use TCG\Voyager\Facades\Voyager;
 
@@ -14,9 +15,7 @@ use TCG\Voyager\Facades\Voyager;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/',IndexComponent::class);
 
 
 Route::group(['prefix' => 'admin'], function () {
