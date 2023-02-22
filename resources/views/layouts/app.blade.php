@@ -37,12 +37,14 @@
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">
-                        <li class="nav-item">
-                            <a class="nav-link" href="">
-                                @livewire('shop.cart-component')
-                            </a>
-                            
-                        </li>
+                        @auth
+                            <li class="nav-item">
+                                <a class="nav-link" href="">
+                                    @livewire('shop.cart-component')
+                                </a>
+                                
+                            </li>
+                        @endauth
                         <!-- Authentication Links -->
                         @guest
                             @if (Route::has('login'))
