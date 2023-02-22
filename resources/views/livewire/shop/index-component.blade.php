@@ -10,7 +10,10 @@
                         <p class="card-text">{{$product->desription}}</p>
                     </div>
                     <div class="card-body">
-                        <a href="#" class="card-link">Agregar al carrito</a>
+                        <button type="button" class="btn btn-primary"
+                        wire:click="add_to_cart('{{$product->id}}')"
+                        >Agregar al carrito</button>
+                        
                     </div>
                 </div>
             </div>

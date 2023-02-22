@@ -14,4 +14,18 @@ class IndexComponent extends Component
         ->extends('layouts.app')
         ->section('content');
     }
+
+    public function add_to_cart(Product $product)
+    {
+        \Cart::session(\auth()->id())->add(array(
+            'id' => $product->id,
+            'name' => $product->name,
+            'price' => $product->price,
+            'quantity' => 1,
+            'attributes' => array(),
+            'associatedModel' => $product
+        ));
+        $this->emit('message', 'El producto se ha agregado correctamente.');
+        $this->emitTo('shop.cart-component', 'add_to_cart');
+    }
 }
