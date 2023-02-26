@@ -26,8 +26,9 @@ class IndexComponent extends Component
         ]);
     }
 
-    public function delete_item()
+    public function delete_item($itemId)
     {
-        
+        Cart::session(\auth()->id())->remove($itemId);
+        // nifificacion
     }
 }

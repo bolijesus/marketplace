@@ -15,7 +15,7 @@
                     <tr>
                         <td>{{ $item->name }}</td>
                         <td>
-                            <input type="number" class="form-control" 
+                            <input type="number" class="form-control" min="0"
                             id="v{{$item->id}}"
                             wire:change="update_quantity({{ $item->id }}, $event.target.value)"
                             value="{{ $item->quantity }}" placeholder="Cantidad">
@@ -32,5 +32,6 @@
             </tbody>
         </table>
         <h3>Total: $ {{ Cart::session(auth()->id())->getTotal() }}</h3>
+        <a href="{{route('checkout')}}" class="btn btn-primary">Pagar</a>
     </div>
 </div>
