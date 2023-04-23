@@ -11,7 +11,7 @@ class CheckoutComponent extends Component
     public $fullname, $address, $city, $state, $zipcode, $phone;
     public $billing_fullname, $billing_address, $billing_city, $billing_state, $billing_zipcode, $billing_phone;
     public $payment_method, $total;
-    
+
     public function render()
     {
         return view('livewire.shop.checkout-component')
@@ -35,8 +35,8 @@ class CheckoutComponent extends Component
         $order->user_id = \auth()->id();
         $order->order_number = \uniqid('OrderNumber-');
         $order->item_count = CartFacade::session(auth()->id())->getTotalQuantity();
-        
-        
+
+
         $order->shipping_fullname = $this->fullname;
         $order->shipping_address = $this->address;
         $order->shipping_city = $this->city;
@@ -63,7 +63,7 @@ class CheckoutComponent extends Component
         $order->total = CartFacade::session(auth()->id())->getTotal();
 
         $order->save();
-        
+
         $carItems = CartFacade::session(auth()->id())->getContent();
         foreach ($carItems as $key => $item) {
             $order->items()->attach($item->id, [
@@ -73,10 +73,11 @@ class CheckoutComponent extends Component
         }
 
         if ($this->payment_method == 'paypal') {
-            # code...
-        } else {
-             
-        }
+            return \redirect()->route('paypal.checkout', $order->id);
+        } 
         
+        CartFacade::session(\auth()->id())->clear();
+        return \redirect()->route('shop.index');
+
     }
 }
