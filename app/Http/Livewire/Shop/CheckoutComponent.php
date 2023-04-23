@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Shop;
 
 use App\Models\Order;
+use Darryldecode\Cart\Facades\CartFacade;
 use Livewire\Component;
 
 class CheckoutComponent extends Component
@@ -27,14 +28,13 @@ class CheckoutComponent extends Component
             'state' => 'required',
             'zipcode' => 'required',
             'phone' => 'required',
-
-
+            'payment_method' => 'required'
         ]);
 
         $order = new Order();
         $order->user_id = \auth()->id();
         $order->order_number = \uniqid('OrderNumber-');
-        $order->item_count = Cart::session(auth()->id())->getTotalQuantity();
+        $order->item_count = CartFacade::session(auth()->id())->getTotalQuantity();
         
         
         $order->shipping_fullname = $this->fullname;
@@ -60,11 +60,11 @@ class CheckoutComponent extends Component
         }
 
         $order->payment_method = $this->payment_method;
-        $order->total = Cart::session(auth()->id())->getTotal();
+        $order->total = CartFacade::session(auth()->id())->getTotal();
 
         $order->save();
-        // $order->is_paid =
-        $carItems = Cart::session(auth()->id())->getContent();
+        
+        $carItems = CartFacade::session(auth()->id())->getContent();
         foreach ($carItems as $key => $item) {
             $order->items()->attach($item->id, [
                 'price' => $item->price,
