@@ -3,29 +3,52 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Str;
-use TCG\Voyager\Models\Role;
-use TCG\Voyager\Models\User;
 
 class UsersTableSeeder extends Seeder
 {
+
     /**
-     * Auto generated seed file.
+     * Auto generated seed file
      *
      * @return void
      */
     public function run()
     {
-        if (User::count() == 0) {
-            $role = Role::where('name', 'admin')->firstOrFail();
+        
 
-            User::create([
-                'name'           => 'Admin',
-                'email'          => 'admin@admin.com',
-                'password'       => bcrypt('password'),
-                'remember_token' => Str::random(60),
-                'role_id'        => $role->id,
-            ]);
-        }
+        \DB::table('users')->delete();
+        
+        \DB::table('users')->insert(array (
+            0 => 
+            array (
+                'avatar' => 'users/default.png',
+                'created_at' => '2023-02-19 14:09:51',
+                'email' => 'admin@admin.com',
+                'email_verified_at' => NULL,
+                'id' => 1,
+                'name' => 'Admin',
+                'password' => '$2y$10$YXuUeln/vEeFQNGJXDZ7Su185JjO80hsey9jKH7GstT9PxouXbcJa',
+                'remember_token' => 'wCUCrakbfDT7sudRDjoQeFexINHDNGvErya1mfjS61WOoh5gt2mFt8rqX0Nm',
+                'role_id' => 1,
+                'settings' => NULL,
+                'updated_at' => '2023-02-19 14:09:51',
+            ),
+            1 => 
+            array (
+                'avatar' => 'users/default.png',
+                'created_at' => '2023-02-22 03:45:34',
+                'email' => 'user@user.com',
+                'email_verified_at' => NULL,
+                'id' => 2,
+                'name' => 'JesusDavid  BolivarNoguera',
+                'password' => '$2y$10$Sr6Hbr9n6zE6ftSMGmE1FOY.bnppGai6IDhKHATK4/l2TafT7l5Sa',
+                'remember_token' => NULL,
+                'role_id' => 2,
+                'settings' => NULL,
+                'updated_at' => '2023-02-22 03:45:34',
+            ),
+        ));
+        
+        
     }
 }

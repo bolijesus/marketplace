@@ -1,0 +1,2 @@
+Comando para convertir todas las tablas del voyager en seeders, esto se usa en el video https://youtu.be/IkrWd4ycEFc?list=PL33d8DmxxcSMxIdhWXqdL-BgDZGzlig9l 
+php artisan iseed data_types,data_rows,categories,posts,pages,menus,menu_items,roles,users,user_roles,permissions,permission_role,settings
